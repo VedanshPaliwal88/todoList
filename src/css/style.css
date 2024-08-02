@@ -1,0 +1,153 @@
+body {
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+    margin: 0;
+    height: 100vh;
+    height: fit-content;
+    position: relative;
+}
+
+/* Left menu css */
+
+menu {
+    grid-row: 1 / 3;
+    background-color: slateblue;
+    margin: 0;
+    padding: 16px;
+    height: 100%;
+    display: grid;
+    grid-auto-rows: 50px;
+}
+
+.menuContainer {
+    position: sticky;
+    top: 16px;
+
+}
+
+.menuTitle {
+    font-size: 2em;
+    font-weight: 700;
+    font-family: cursive;
+    margin-bottom: 1.5em;
+}
+
+.project, .add-project {
+    padding: 4px 16px;
+    margin-bottom: 8px;
+    font-size: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.project:hover, .add-project:hover {
+    font-size: 26px;
+    outline: 2px solid slategray;
+    box-shadow: 0 0 10px 2px;
+}
+
+/* Top bar css */
+
+header {
+    background-color: blue;
+    color: black;
+    padding: 16px 32px;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+
+    font-size: 1.75em;
+}
+
+/* Main content css */
+
+#content {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: lightblue;
+    gap: 8px;
+}
+
+.contentHeading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 32px;
+}
+
+.contentTitle {
+    font-size: 3.5em;
+    text-decoration: underline;
+}
+
+.addItem {
+    padding: 8px;
+    line-height: 1rem;
+    font-size: 2rem;
+}
+
+.addItem:hover {
+    border: 1px solid lightseagreen;
+    border-radius: 0.1em;
+    box-shadow: lightseagreen 1px 1px 2px 2px;
+}
+
+.todoItem {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 16px;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.todoItem:hover{
+    box-shadow: slateblue 1px 1px 5px 2px;
+}
+.lowPriority {
+    background-color: greenyellow;
+}
+.mediumPriority {
+    background-color: yellow;
+}
+.highPriority {
+    background-color: brown;
+}
+
+
+.checked {
+    text-decoration: line-through;
+}
+
+.itemHeading {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+
+.itemTitle {
+    font-size: 2.5em;
+}
+
+.todoItem > .itemDescription {
+    grid-column: 1 / span 2;
+}
+
+.dueDate {
+    justify-self: flex-end;
+}
+
+dialog[open] {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 40%;
+    border: 1px solid black;
+    position: relative;
+}

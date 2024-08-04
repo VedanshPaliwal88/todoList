@@ -46,6 +46,11 @@ menu {
     box-shadow: 0 0 10px 2px;
 }
 
+.newProjectInput {
+    border: none;
+    background-color: transparent;
+}
+
 /* Main content css */
 
 #content {

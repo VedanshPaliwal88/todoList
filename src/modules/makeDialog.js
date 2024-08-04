@@ -1,4 +1,5 @@
 import populateContent from "./populateContent";
+import { format } from 'date-fns';
 
 function viewItemDialog(item, project) {
     let dialog = document.querySelector("#dialog");
@@ -83,7 +84,9 @@ function editItemDialog(item, project) {
     dueDateInput.type = "date";
     dueDateInput.name = "dueDate";
     dueDateInput.id = "dueDate";
-    dueDateInput.value = item.dueDate;
+    let formattedDueDate = format(item.dueDate, 'yyyy-MM-dd');
+    dueDateInput.value = formattedDueDate;
+    console.log(item);
     dueDate.append(dueDateInput);
 
     priority.textContent = "Priority: ";

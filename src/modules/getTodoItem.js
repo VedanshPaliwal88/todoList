@@ -1,6 +1,7 @@
 import deleteItem from "./deleteItem";
 import populateContent from "./populateContent";
 import {viewItemDialog, editItemDialog} from "./makeDialog";
+import { format } from 'date-fns';
 
 export default function getTodoItem(item, project) {
     let todoItem = document.createElement('div');
@@ -24,7 +25,7 @@ export default function getTodoItem(item, project) {
     } else if(item.priority == 3) {
         todoItem.classList.add('highPriority');
     } else {
-        console.log("priority background assigning error: ", item.title);
+        console.log("new item created or priority background assigning error ", item.title);
     }
 
     itemHeading.classList.add('itemHeading');
@@ -44,8 +45,10 @@ export default function getTodoItem(item, project) {
     itemBtns.append(editBtn, deleteBtn);
     itemHeading.append(itemTitle, itemBtns);
     dueDate.classList.add('dueDate');
-    dueDate.textContent = item.dueDate;
-
+    if (item.dueDate) {
+        const formattedDate = format(item.dueDate, 'MMMM dd, yyyy');
+        dueDate.textContent = formattedDate;
+    } 
     todoItem.append(itemHeading, dueDate);
     return todoItem;
 }

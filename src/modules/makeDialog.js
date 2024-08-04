@@ -49,10 +49,6 @@ function viewItemDialog(item, project) {
 }
 
 function editItemDialog(item, project) {
-    generateItemEdit(item, project);
-}
-
-function generateItemEdit(item, project) {
     let dialog = document.querySelector("#dialog");
     dialog.textContent = '';
 
@@ -118,17 +114,20 @@ function generateItemEdit(item, project) {
 
     dialog.addEventListener('close', function add(e) {
         e.preventDefault();
-        const newInfo = dialog.returnValue.split(',');
-        item.editItem(...newInfo);
-        populateContent(project);
         // to prevent event listeners for different items getting linked
+        let returns = []
+        dialog.close(returns);
         dialog.removeEventListener('close', add);
     })
-
-    submitBtn.addEventListener('click', function submit() {
+    
+    submitBtn.addEventListener('click', function submit(e) {
+        e.preventDefault();
         let priorityValue = document.querySelector('input[name="priority"]:checked').value;
         let returns = [titleInput.value, descriptionInput.value, dueDateInput.value, priorityValue];
         dialog.close(returns);
+        item.editItem(...returns);
+        populateContent(project);
+        // to prevent event listeners for different items getting linked
         submitBtn.removeEventListener('click', submit);
     })
     submitBtn.textContent = "submit";
@@ -137,6 +136,7 @@ function generateItemEdit(item, project) {
         let priorityValue = document.querySelector('input[name="priority"]:checked').value;
         let returns = [titleInput.value, descriptionInput.value, dueDateInput.value, priorityValue];
         dialog.close(returns);
+        // to prevent event listeners for different items getting linked
         closeBtn.removeEventListener('click', close);
     })
     closeBtn.textContent = "close";

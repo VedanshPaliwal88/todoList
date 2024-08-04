@@ -16,15 +16,22 @@ export default function populateMenu(myProjects) {
     for (const project of myProjects) {
         let projectDiv = document.createElement('div');
         projectDiv.addEventListener('click', () => populateContent(project));
-        let editBtn = document.createElement('button');
+        let deleteBtn = document.createElement('button');
         let textSpan = document.createElement('span');
 
         projectDiv.classList.add('project');
         textSpan.textContent = project.name;
-        editBtn.textContent = "Edit"
-        // add event listener
+        deleteBtn.textContent = "delete"
+        deleteBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            let idx = myProjects.indexOf(project);
+            myProjects.splice(idx, 1);
+            populateMenu(myProjects);
+            if (myProjects == []) populateContent('');
+            else populateContent(myProjects[0]);
+        })
         projectDiv.appendChild(textSpan);
-        projectDiv.appendChild(editBtn);
+        projectDiv.appendChild(deleteBtn);
         menuContainer.appendChild(projectDiv);
     }
 

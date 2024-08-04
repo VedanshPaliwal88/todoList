@@ -48,20 +48,6 @@ menu {
     box-shadow: 0 0 10px 2px;
 }
 
-/* Top bar css */
-
-header {
-    background-color: blue;
-    color: black;
-    padding: 16px 32px;
-    position: sticky;
-    top: 0;
-    display: flex;
-    align-items: center;
-
-    font-size: 1.75em;
-}
-
 /* Main content css */
 
 #content {

@@ -85,9 +85,10 @@ function editItemDialog(item, project) {
     dueDateInput.type = "date";
     dueDateInput.name = "dueDate";
     dueDateInput.id = "dueDate";
-    let formattedDueDate = format(item.dueDate, 'yyyy-MM-dd');
-    dueDateInput.value = formattedDueDate;
-    console.log(item);
+    if (item.dueDate) {
+        let formattedDueDate = format(item.dueDate, 'yyyy-MM-dd');
+        dueDateInput.value = formattedDueDate;
+    }
     dueDate.append(dueDateInput);
 
     priority.textContent = "Priority: ";

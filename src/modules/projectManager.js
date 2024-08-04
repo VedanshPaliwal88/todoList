@@ -50,29 +50,11 @@ class projectManager {
                 return newProject
             })
         } else {
-            console.log("empty")
-            // let newProject1 = new project("Home");
-            // let item1 = new todoItem()
             fetch('items.json')
                 .then(response => response.json())
                 .then(data => {
                     localStorage.setItem("projects", JSON.stringify(data));
                     this.loadFromLocalStorage();
-                    // this.projects = data.map(projectData => {
-                    //     const newProject = new project(projectData.name);
-                    //     projectData.items.forEach(item => {
-                    //         const newTodoItem = new todoItem(
-                    //             itemData.title,
-                    //             itemData.description,
-                    //             itemData.dueDate,
-                    //             itemData.priority,
-                    //             itemData.checked);
-        
-                    //         newProject.addItem(newTodoItem);
-                    //     });
-                    //     return newProject;
-                    // });
-                    // localStorage.setItem("projects", JSON.stringify(this.projects));
                 })
                 .catch(error => console.log("error fetching items from items.json: ", error));
             

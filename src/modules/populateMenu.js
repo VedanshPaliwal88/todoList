@@ -1,5 +1,6 @@
 import populateContent from "./populateContent";
 import project from "./project";
+import {manager, projectManager} from './projectManager';
 
 export default function populateMenu(myProjects) {
     let menu = document.querySelector("menu");
@@ -29,6 +30,7 @@ export default function populateMenu(myProjects) {
             populateMenu(myProjects);
             if (myProjects == []) populateContent('');
             else populateContent(myProjects[0]);
+            manager.saveToLocalStorage();
         })
         projectDiv.appendChild(textSpan);
         projectDiv.appendChild(deleteBtn);
@@ -53,6 +55,7 @@ export default function populateMenu(myProjects) {
                 let newProject = new project(newProjectInput.value);
                 myProjects.push(newProject);
                 populateMenu(myProjects);
+                manager.saveToLocalStorage();
             }
         })
         newProjectDiv.append(newProjectInput, submtiBtn);

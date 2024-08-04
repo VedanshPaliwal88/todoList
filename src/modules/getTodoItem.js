@@ -1,6 +1,7 @@
 import deleteItem from "./deleteItem";
 import populateContent from "./populateContent";
 import {viewItemDialog, editItemDialog} from "./makeDialog";
+import {manager, projectManager} from './projectManager';  
 import { format } from 'date-fns';
 
 export default function getTodoItem(item, project) {
@@ -14,6 +15,7 @@ export default function getTodoItem(item, project) {
     let itemBtns = document.createElement('div');
     let editBtn = document.createElement('button');
     let deleteBtn = document.createElement('button');
+    let checkBtn = document.createElement('button');
     let dueDate = document.createElement('dueDate');
 
     todoItem.classList.add('todoItem');
@@ -31,18 +33,41 @@ export default function getTodoItem(item, project) {
     itemHeading.classList.add('itemHeading');
     itemTitle.classList.add('itemTitle');
     itemTitle.textContent = item.title;
+    
+    if (item.checked) {
+        itemTitle.classList.toggle('checked');
+    }
+
     editBtn.textContent="edit";
     deleteBtn.textContent="delete";
+    checkBtn.textContent="✓";
+        
     deleteBtn.addEventListener('click', (e) => {
         deleteItem(item, project)
         populateContent(project);
         e.stopPropagation();
+        manager.saveToLocalStorage();
     })
+    
     editBtn.addEventListener('click', (e) => {
         editItemDialog(item, project);
         e.stopPropagation();
+        manager.saveToLocalStorage();
     })
-    itemBtns.append(editBtn, deleteBtn);
+
+    checkBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        console.log(item.checked);
+        item.toggleCheck();
+        console.log(item.checked);
+        itemTitle.classList.toggle('checked');
+        manager.saveToLocalStorage();
+    })
+
+
+    itemBtns.append(checkBtn, editBtn, deleteBtn);
+    itemBtns.classList.add('itemBtns');
+
     itemHeading.append(itemTitle, itemBtns);
     dueDate.classList.add('dueDate');
     if (item.dueDate) {

@@ -124,6 +124,12 @@ menu {
     font-size: 2.5em;
 }
 
+.itemBtns {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
 .todoItem > .itemDescription {
     grid-column: 1 / span 2;
 }

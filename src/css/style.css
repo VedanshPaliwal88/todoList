@@ -2,8 +2,7 @@ body {
     display: grid;
     grid-template-columns: 2fr 8fr;
     margin: 0;
-    height: 100vh;
-    height: fit-content;
+    height: 95vh;
     position: relative;
 }
 
@@ -11,7 +10,7 @@ body {
 
 menu {
     grid-row: 1 / 3;
-    background-color: slateblue;
+    background-color: grey;
     margin: 0;
     padding: 16px;
     height: 100%;
@@ -22,7 +21,6 @@ menu {
 .menuContainer {
     position: sticky;
     top: 16px;
-
 }
 
 .menuTitle {
@@ -51,11 +49,11 @@ menu {
 /* Main content css */
 
 #content {
+    height: 100%;
     padding: 16px;
     display: flex;
     flex-direction: column;
-    height: 100%;
-    background-color: lightblue;
+    width: auto;
     gap: 8px;
 }
 

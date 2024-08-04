@@ -114,7 +114,7 @@ function editItemDialog(item, project) {
     else if (item.priority == 3) priorityInputHigh.checked = true;
     else priorityInputLow.checked = true;
 
-    priority.append(priorityInputLow, "hello", priorityInputMedium, priorityInputHigh);
+    priority.append(priorityInputLow, "low", priorityInputMedium, "medium", priorityInputHigh, "high");
 
     dialog.addEventListener('close', function add(e) {
         e.preventDefault();

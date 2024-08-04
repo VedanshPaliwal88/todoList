@@ -97,7 +97,6 @@ function generateItemEdit(item, project) {
     priorityInputLow.value = 1;
     priorityInputLow.name = "priority";
     priorityInputLow.style.color = "#adff2f";
-    priorityInputLow.checked = true;
     
     priorityInputMedium.textContent="Medium";
     priorityInputMedium.type = "radio";
@@ -111,31 +110,34 @@ function generateItemEdit(item, project) {
     priorityInputHigh.name = "priority";
     priorityInputHigh.style.color = "#a52a2a";
     
+    if (item.priority == 2) priorityInputMedium.checked = true;
+    else if (item.priority == 3) priorityInputHigh.checked = true;
+    else priorityInputLow.checked = true;
+
     priority.append(priorityInputLow, "hello", priorityInputMedium, priorityInputHigh);
 
-    // maybe piles up many event listeners over time
-    dialog.addEventListener('close', (e) => {
+    dialog.addEventListener('close', function add(e) {
         e.preventDefault();
         const newInfo = dialog.returnValue.split(',');
         item.editItem(...newInfo);
-        // add check to see if new item was not made properly 
-        // if (item.title == '') {
-        //     let idx = project.items.indexOf(item);
-        //     project.items.splice(idx, 1);
-        // }
         populateContent(project);
+        // to prevent event listeners for different items getting linked
+        dialog.removeEventListener('close', add);
     })
 
-    submitBtn.addEventListener('click', () => {
+    submitBtn.addEventListener('click', function submit() {
         let priorityValue = document.querySelector('input[name="priority"]:checked').value;
         let returns = [titleInput.value, descriptionInput.value, dueDateInput.value, priorityValue];
         dialog.close(returns);
+        submitBtn.removeEventListener('click', submit);
     })
     submitBtn.textContent = "submit";
-
-    closeBtn.addEventListener('click', () => {
-        let returns = [item.title, item.description];
+    
+    closeBtn.addEventListener('click', function close() {
+        let priorityValue = document.querySelector('input[name="priority"]:checked').value;
+        let returns = [titleInput.value, descriptionInput.value, dueDateInput.value, priorityValue];
         dialog.close(returns);
+        closeBtn.removeEventListener('click', close);
     })
     closeBtn.textContent = "close";
 

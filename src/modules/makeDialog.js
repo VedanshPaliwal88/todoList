@@ -1,5 +1,6 @@
 import populateContent from "./populateContent";
 import { format } from 'date-fns';
+import {manager, projectManager} from './projectManager';
 
 function viewItemDialog(item, project) {
     let dialog = document.querySelector("#dialog");
@@ -129,6 +130,7 @@ function editItemDialog(item, project) {
         let returns = [titleInput.value, descriptionInput.value, dueDateInput.value, priorityValue];
         dialog.close(returns);
         item.editItem(...returns);
+        manager.saveToLocalStorage();
         populateContent(project);
         // to prevent event listeners for different items getting linked
         submitBtn.removeEventListener('click', submit);
